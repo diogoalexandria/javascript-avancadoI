@@ -5,6 +5,7 @@ class NegotiationController {
         this._inputDate = $('#data');
         this._inputQuantity = $('#quantidade');
         this._inputValue = $('#valor');
+        this._negotiationsList = new NegotiationList();
     }
 
     add(event){
@@ -44,15 +45,35 @@ class NegotiationController {
         // console.log(date);
         // console.log("Tipo da variavel date: " + typeof(date));        
         
-        let negotiation = new Negotiation(
+        let negotiation = this._createNegotiation();
+        
+        //console.log(date);
+        console.log(negotiation.date);     
+        console.log(negotiation);
+
+        console.log("Data formatada: " + DateHelper.dateToText(negotiation.date));
+
+        this._negotiationsList.add(negotiation);
+        console.log(this._negotiationsList.negotiations);
+
+        this._cleanForm(); //Limpa o formulário apos adicionar uma negociação.
+    }
+
+    _createNegotiation() {
+        return new Negotiation(
             // date,
+            DateHelper.textToDate(this._inputDate.value),
             this._inputQuantity.value,
             this._inputValue.value
         );
-        console.log(date);
-        console.log(negotiation.date);
-     
-        console.log(negotiation);
-        console.log(dateHelper.dateToText(negotiation.date));
+    }    
+
+    _cleanForm() {
+
+        this._inputDate.value = '';
+        this._inputQuantity.value = 1;
+        this._inputValue.value = 0.0;
+
+        this._inputQuantity.focus();
     }
 }

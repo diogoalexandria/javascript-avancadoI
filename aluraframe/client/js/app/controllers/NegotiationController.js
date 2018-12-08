@@ -6,6 +6,9 @@ class NegotiationController {
         this._inputQuantity = $('#quantidade');
         this._inputValue = $('#valor');
         this._negotiationsList = new NegotiationList();
+        this._negotiationsView = new NegotiationsViews($('#negotiationsView'));
+
+        this._negotiationsView.update(this._negotiationsList);
     }
 
     add(event){
@@ -56,7 +59,8 @@ class NegotiationController {
         this._negotiationsList.add(negotiation);
         console.log(this._negotiationsList.negotiations);
 
-        this._cleanForm(); //Limpa o formulário apos adicionar uma negociação.
+        this._negotiationsView.update(this._negotiationsList);//Atualiza o formulário com a nova lista de negociações.
+        this._cleanForm(); //Limpa o formulário após adicionar uma negociação.
     }
 
     _createNegotiation() {

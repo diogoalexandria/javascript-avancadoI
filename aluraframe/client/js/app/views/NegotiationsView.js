@@ -1,10 +1,6 @@
-class NegotiationsViews {
+class NegotiationsViews extends View {
 
-    constructor(element) {
-        this._element = element; 
-    }
-
-    _template(negotiationsList) {
+    template(negotiationsList) {
         return `
             <table class="table table-hover table-bordered">
                 <thead>
@@ -53,12 +49,7 @@ class NegotiationsViews {
                     </tfoot>
             </table>
         `
-    }
-
-    update(negotiationsList) {
-        
-        this._element.innerHTML = this._template(negotiationsList); //innerHTML converte strings para elementos válidos no dom
-    }
+    }   
 }
 
 
